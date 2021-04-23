@@ -1,1 +1,3 @@
-# Discordbot-new
+# Discord Bot in Python
+
+Utilizes Discord.py Rewrite.
