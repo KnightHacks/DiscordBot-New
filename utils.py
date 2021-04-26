@@ -9,15 +9,16 @@ from asyncio import TimeoutError
 left = "⬅"
 right = "➡"
 
+
 async def paginate_embed(bot, channel, embeds):
-    """
-    async def modifier_func(type, curr_page) type: 1 for forward, -1 for backward.
-    """
+    """async def modifier_func(type, curr_page) type: 1 for forward, -1 for backward."""  # noqa: E501
     total_pages = len(embeds)
 
     curr_page = 0
 
-    og_msg = await channel.send(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
+    og_msg = await channel.send(embed=embeds[curr_page].set_footer(
+        text=f"Page {curr_page+1}/{total_pages}"
+    ))
     if total_pages <= 1:
         return
 
@@ -26,9 +27,9 @@ async def paginate_embed(bot, channel, embeds):
 
     def check(reaction, user):
         return (
-                not user.bot
-                and reaction.message.channel == channel
-                and reaction.message.id == og_msg.id
+            not user.bot
+            and reaction.message.channel == channel
+            and reaction.message.id == og_msg.id
         )
 
     try:
@@ -40,13 +41,17 @@ async def paginate_embed(bot, channel, embeds):
                 if curr_page < total_pages - 1:
                     curr_page += 1
                     await og_msg.edit(
-                        embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
+                        embed=embeds[curr_page].set_footer(
+                            text=f"Page {curr_page+1}/{total_pages}"
+                        ))
                 await og_msg.remove_reaction(right, user)
             elif str(reaction.emoji) == left:
                 if curr_page > 0:
                     curr_page -= 1
                     await og_msg.edit(
-                        embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
+                        embed=embeds[curr_page].set_footer(
+                            text=f"Page {curr_page+1}/{total_pages}"
+                        ))
                 await og_msg.remove_reaction(left, user)
             else:
                 continue

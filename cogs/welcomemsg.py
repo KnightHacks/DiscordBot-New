@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 LOGGING_CHANNEL = os.getenv('LOGGING_CHANNEL_ID')
 
+
 class WelcomeMsg(commands.Cog):
 
     def __init__(self, bot):
@@ -41,11 +42,11 @@ class WelcomeMsg(commands.Cog):
 #     @commands.command()
 #     async def sendwelcomemsg(self, ctx):
 #         is_owner = await self.bot.is_owner(ctx.author)
-        
+
 #         if not is_owner:
 #             await ctx.author.send("You do not have permissions for this command.")
 #             return
-            
+
 #         welcome_msg = """
 #         Welcome to Knight Hacks 2020! We're excited that you're here!
 
@@ -61,6 +62,7 @@ class WelcomeMsg(commands.Cog):
 #         """
 
 #         await ctx.send(welcome_msg)
+
 
 def setup(bot):
     bot.add_cog(WelcomeMsg(bot))

@@ -1,6 +1,6 @@
-import discord
 from discord.ext import commands
 import random
+
 
 class Diceroll(commands.Cog):
 
@@ -12,9 +12,10 @@ class Diceroll(commands.Cog):
         if ctx.author == self.bot.user:
             return
 
-        roll = random.randint(1,6)
+        roll = random.randint(1, 6)
 
         await ctx.send(f'{ctx.author.display_name}, you rolled a {roll}.')
+
 
 def setup(bot):
     bot.add_cog(Diceroll(bot))

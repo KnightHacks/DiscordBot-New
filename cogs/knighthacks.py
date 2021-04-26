@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import random
 
+
 class KnightHacks(commands.Cog):
 
     def __init__(self, bot):
@@ -14,13 +15,14 @@ class KnightHacks(commands.Cog):
 
     @commands.command()
     async def where(self, ctx):
-        await ctx.send("right here :) \n**hopin:** <https://hopin.to/events/knight-hacks> "
-                       "\n**day of:** <https://live.knighthacks.org/> "
-                       "\n**hacker guide:** <https://www.knighthacks.org/guide> "
-                       "\n**devpost:** <https://knight-hacks-2020-online.devpost.com/> ")
+        await ctx.send("""right here :)
+        **hopin:** <https://hopin.to/events/knight-hacks>
+        **day of:** <https://live.knighthacks.org/>
+        **hacker guide:** <https://www.knighthacks.org/guide>
+        **devpost:** <https://knight-hacks-2020-online.devpost.com/>""")
 
     @commands.command()
-    async def how(self, ctx, *, text = None):
+    async def how(self, ctx, *, text=None):
         if text is not None and text.lower() == 'is lancelot':
             await ctx.send('awee thank you for asking!! <3')
 
@@ -43,7 +45,7 @@ class KnightHacks(commands.Cog):
             '...likes shorts? I like shorts!',
             '...is gonna win KnightHacks 2020?!'
         ]
-        
+
         response = random.choice(responses)
         await ctx.send(response)
 
@@ -58,6 +60,7 @@ class KnightHacks(commands.Cog):
     @commands.command()
     async def tutorial(self, ctx):
         await ctx.send("<https://www.youtube.com/watch?v=1cuhODT6MGM>")
+
 
 def setup(bot):
     bot.add_cog(KnightHacks(bot))

@@ -1,6 +1,6 @@
-import discord
 from discord.ext import commands
 import random
+
 
 class Coinflip(commands.Cog):
 
@@ -18,7 +18,6 @@ class Coinflip(commands.Cog):
             await ctx.send(f'{ctx.author.display_name}, you got Heads.')
         else:
             await ctx.send(f'{ctx.author.display_name}, you got Tails.')
-
 
 
 def setup(bot):

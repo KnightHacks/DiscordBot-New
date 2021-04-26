@@ -15,6 +15,7 @@ api_key = os.getenv('REDDIT_API_KEY')
 client_id = os.getenv('REDDIT_CLIENT_ID')
 user_agent = os.getenv('REDDIT_USER_AGENT')
 
+
 class Wholesome(commands.Cog):
 
     def __init__(self, bot):
@@ -33,7 +34,6 @@ class Wholesome(commands.Cog):
     #     for post in posts:
     #         img_urls.append(post.url.encode('utf-8'))
     #         img_titles.append(post.title.encode('utf-8'))
-            
 
     #     for index, url in enumerate(img_urls):
     #         _, ext = os.path.splitext(img_urls)
@@ -42,6 +42,7 @@ class Wholesome(commands.Cog):
     #             try:
     #                 print('downloading ' + img_urls[index])
     #                 urllib.urlretrieve(img_urls[index])
-                    
+
+
 def setup(bot):
     bot.add_cog(Wholesome(bot))
