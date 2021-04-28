@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 import random
-import asyncio
 import aiohttp
 from bs4 import BeautifulSoup
+
 
 class Fact(commands.Cog):
 
@@ -27,9 +27,16 @@ class Fact(commands.Cog):
                     fact = soup.find(id='z')
                     # print(fact.text.split('\n')[0])
 
-                    embed = discord.Embed(color=0x7ce4f7, timestamp=ctx.message.created_at)
-                    embed.add_field(name=f'Fact #{id}:', value=fact.text.split('\n')[0])
+                    embed = discord.Embed(
+                        color=0x7ce4f7,
+                        timestamp=ctx.message.created_at
+                    )
+                    embed.add_field(
+                        name=f'Fact #{id}:',
+                        value=fact.text.split('\n')[0]
+                    )
                     await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Fact(bot))

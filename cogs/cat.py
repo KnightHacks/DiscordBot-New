@@ -1,9 +1,7 @@
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
-import asyncio
 import aiohttp
+
 
 class Cat(commands.Cog):
 
@@ -21,10 +19,15 @@ class Cat(commands.Cog):
 
                 x = await response.json()
 
-                embed = discord.Embed(title='Random Cat', color=0x7ce4f7, timestamp=ctx.message.created_at)
+                embed = discord.Embed(
+                    title='Random Cat',
+                    color=0x7ce4f7,
+                    timestamp=ctx.message.created_at
+                )
                 embed.set_image(url=x[0]['url'])
 
                 await ctx.send(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Cat(bot))

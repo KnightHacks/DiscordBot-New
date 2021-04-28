@@ -1,5 +1,5 @@
-import discord
 from discord.ext import commands
+
 
 class Spongebob(commands.Cog):
 
@@ -10,6 +10,7 @@ class Spongebob(commands.Cog):
     async def spongebob(self, ctx):
         pass
         # await ctx.channel.send
+
 
 def setup(bot):
     bot.add_cog(Spongebob(bot))

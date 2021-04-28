@@ -12,13 +12,13 @@ from utils import paginate_embed
 import discord
 from discord.ext import commands
 
-#est is 4hrs ahead of utc
-est = tz(timedelta(hours = -4))
+# est is 4hrs ahead of utc
+est = tz(timedelta(hours=-4))
 
-start = dt.fromtimestamp(1602284400, tz = est) # 6pm Oct 9th 2020
-end = dt.fromtimestamp(1602442800, tz = est) # 3pm Oct 11th 2020
+start = dt.fromtimestamp(1602284400, tz=est)  # 6pm Oct 9th 2020
+end = dt.fromtimestamp(1602442800, tz=est)  # 3pm Oct 11th 2020
 
-orl = partial(dt.now, tz = est) # Gives current time in Orlando
+orl = partial(dt.now, tz=est)  # Gives current time in Orlando
 
 # Schedule Oct 9-11, 2020
 # sched = {
@@ -75,7 +75,8 @@ sched = {
     9: [
         ('5:00 pm', 'Hopin Open - 5pm EDT', ''),
         ('7:00 pm', 'Opening Ceremony - 7pm EDT', ''),
-        ('8:00 pm', 'Virtual Career Fair - 8pm EDT', 'https://app.hopin.to/events/knight-hacks/expo'),
+        ('8:00 pm', 'Virtual Career Fair - 8pm EDT',
+         'https://app.hopin.to/events/knight-hacks/expo'),
         ('10:00 pm', 'Hacking Starts - 10pm EDT', ''),
         ('10:00 pm', 'Team Building - 10pm EDT', ''),
         ('10:00 pm', 'Welcome To Cloud Hero Data & ML with BigQuery - 10pm EDT', ''),
@@ -127,6 +128,7 @@ sched = {
     ]
 }
 
+
 def time_left(event):
     diff = event - orl()
     d = diff.days
@@ -134,9 +136,9 @@ def time_left(event):
     m, s = divmod(m, 60)
 
     return (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
-           + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
-           + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
-           + f"{s} second{'s' * bool(s - 1)}"
+        + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
+        + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
+        + f"{s} second{'s' * bool(s - 1)}"
 
 
 class Times(commands.Cog):
@@ -168,21 +170,31 @@ class Times(commands.Cog):
             if day >= orl().day:
                 full_day = ['Friday', 'Saturday', 'Sunday'][day - 9]
 
-                embed = discord.Embed(title = 'KnightHacks 2020 Schedule :scroll:',
-                                      description = f'**{full_day}, Oct {day}** \nAll Workshops are on Hopin! \nSo much fun to be had :))',
-                                      color = 0x7ce4f7)
+                embed = discord.Embed(
+                    title='KnightHacks 2020 Schedule :scroll:',
+                    description=f"""**{full_day}, Oct {day}**
+                    All Workshops are on Hopin!
+                    So much fun to be had :))""",
+                    color=0x7ce4f7
+                )
 
                 for num, event in enumerate(events):
                     event_time, event_name, link = event
-                    left = dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=est)
+                    left = dt.strptime(
+                        f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p"
+                    ).replace(tzinfo=est)
                     if (left > orl()):
-                        embed.add_field(name=f"{num + 1}. {event_name}",
-                                    value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else '')),
-                                    inline=False)
+                        embed.add_field(
+                            name=f"{num + 1}. {event_name}",
+                            value=(
+                                f"in {time_left(left)}" +
+                                (f", [**link**]({link})" if link else '')),
+                            inline=False)
 
                 embeds.append(embed)
 
         await paginate_embed(self.bot, ctx.channel, embeds)
+
 
 def setup(bot):
     bot.add_cog(Times(bot))

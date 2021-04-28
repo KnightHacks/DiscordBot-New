@@ -7,6 +7,7 @@ load_dotenv()
 LANG_MSGID = os.getenv('823687567206776862')
 OTHER_MSGID = os.getenv('823687567206776862')
 
+
 class KHRoles(commands.Cog):
 
     def __init__(self, bot):
@@ -52,15 +53,24 @@ class KHRoles(commands.Cog):
 
         if message_id == int(LANG_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(
+                lambda g: g.id == guild_id,
+                bot.guilds
+            )
 
             if payload.emoji.name in self.lang_roles:
-                role = discord.utils.get(guild.roles, name = self.lang_roles[payload.emoji.name])
+                role = discord.utils.get(
+                    guild.roles,
+                    name=self.lang_roles[payload.emoji.name]
+                )
             else:
-                role = discord.utils.get(guild.roles, name = payload.emoji.name)
+                role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
             if role is not None:
-                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                member = discord.utils.find(
+                    lambda m: m.id == payload.user_id,
+                    guild.members
+                )
                 if member is not None:
                     await member.add_roles(role)
                     print('Role assignment: Done.')
@@ -69,15 +79,22 @@ class KHRoles(commands.Cog):
 
         if message_id == int(OTHER_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(
+                lambda g: g.id == guild_id,
+                bot.guilds
+            )
 
             if payload.emoji.name in self.skills:
-                role = discord.utils.get(guild.roles, name = self.skills[payload.emoji.name])
+                role = discord.utils.get(
+                    guild.roles,
+                    name=self.skills[payload.emoji.name]
+                )
             else:
-                role = discord.utils.get(guild.roles, name = payload.emoji.name)
+                role = discord.utils.get(guild.roles, name=payload.emoji.name)
 
             if role is not None:
-                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                member = discord.utils.find(lambda m: m.id == payload.user_id,
+                                            guild.members)
                 if member is not None:
                     await member.add_roles(role)
                     print('Role assignment: Done.')
@@ -94,15 +111,19 @@ class KHRoles(commands.Cog):
 
         if message_id == int(LANG_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
             if payload.emoji.name in self.lang_roles:
-                role = discord.utils.get(guild.roles, name = self.lang_roles[payload.emoji.name])
+                role = discord.utils.get(
+                    guild.roles,
+                    name=self.lang_roles[payload.emoji.name]
+                )
             else:
-                role = discord.utils.get(guild.roles, name = payload.emoji.name)
-            
+                role = discord.utils.get(guild.roles, name=payload.emoji.name)
+
             if role is not None:
-                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                member = discord.utils.find(lambda m: m.id == payload.user_id,
+                                            guild.members)
                 if member is not None:
                     await member.remove_roles(role)
                     print('Role removal: Done.')
@@ -111,15 +132,19 @@ class KHRoles(commands.Cog):
 
         if message_id == int(OTHER_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
 
             if payload.emoji.name in self.skills:
-                role = discord.utils.get(guild.roles, name = self.skills[payload.emoji.name])
+                role = discord.utils.get(
+                    guild.roles,
+                    name=self.skills[payload.emoji.name]
+                )
             else:
-                role = discord.utils.get(guild.roles, name = payload.emoji.name)
-            
+                role = discord.utils.get(guild.roles, name=payload.emoji.name)
+
             if role is not None:
-                member = discord.utils.find(lambda m : m.id == payload.user_id, guild.members)
+                member = discord.utils.find(lambda m: m.id == payload.user_id,
+                                            guild.members)
                 if member is not None:
                     await member.remove_roles(role)
                     print('Role removal: Done.')
