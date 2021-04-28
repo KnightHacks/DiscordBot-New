@@ -49,9 +49,9 @@ async def reload(ctx, extension):
     bot.load_extension(f'cogs.{extension}')
 
 """Load all files in cogs folder (remove '.py' from filename when loading)"""
-for filename in os.listdir('./cogs'):
+for filename in os.listdir(f"{__path__[0]}/cogs"):
     if filename.endswith('.py'):
-        bot.load_extension(f'cogs.{filename[:-3]}')
+        bot.load_extension(f'src.cogs.{filename[:-3]}')
 
 
 @bot.event
