@@ -59,3 +59,4 @@ async def on_ready():
     print(f'{bot.user.name} has joined the chat!')
 
 
+bot.run(TOKEN)
