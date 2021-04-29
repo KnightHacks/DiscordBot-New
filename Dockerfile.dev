@@ -1,0 +1,17 @@
+FROM python:3.9-slim
+LABEL maintainer "webmaster@knighthacks.org"
+
+ENV TZ America/New_York
+
+RUN python3 -m pip install --upgrade pip
+
+WORKDIR /home/discordbot/app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+ENTRYPOINT [ "python3" ]
+CMD [ "-m", "src" ]
