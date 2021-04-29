@@ -58,4 +58,4 @@ for filename in os.listdir(f"{__path__[0]}/cogs"):
 async def on_ready():
     print(f'{bot.user.name} has joined the chat!')
 
-bot.run(TOKEN)
+
