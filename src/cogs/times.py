@@ -7,7 +7,7 @@ Check him out: https://github.com/aadibajpai
 from datetime import timedelta, timezone as tz, datetime as dt
 from functools import partial
 
-from utils import paginate_embed
+from src.utils import paginate_embed
 
 import discord
 from discord.ext import commands

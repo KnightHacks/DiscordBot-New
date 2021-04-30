@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from members import find_role
+from src.members import find_role
 import os
 from dotenv import load_dotenv
 load_dotenv()
