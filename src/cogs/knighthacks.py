@@ -11,7 +11,7 @@ class KnightHacks(commands.Cog):
     @commands.command(aliases=['gh'])
     async def github(self, ctx):
         # await ctx.send("closed source for now bb")
-        await ctx.send("Catch! --> <https://github.com/lienne/ModiBot>")
+        await ctx.send("Catch! --> <https://github.com/KnightHacks/DiscordBot-New>")
 
     @commands.command()
     async def where(self, ctx):
