@@ -19,7 +19,7 @@ We use [Docker](https://www.docker.com/get-started) to build and deploy this
 project. Once you've installed Docker, you should be able to build the project using:
 
 ```bash
-docker build -t lancelot .
+docker build -t lancelot -f Dockerfile.dev .
 ```
 
 Then use:
