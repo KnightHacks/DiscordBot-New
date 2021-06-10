@@ -13,7 +13,7 @@ class Devselect(commands.Cog):
     async def devselect(self, ctx, count, *names):
         if count is None:
             await ctx.send("Please specify a count!")
-            count = int(count)
+        count = int(count)
         pr_reviewers = ", ".join(random.sample(names, count))
         await ctx.send(
             f"{ctx.author.mention}"
