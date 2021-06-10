@@ -42,7 +42,7 @@ class Roles(commands.Cog):
         role = None
         if message_id == int(MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, self.bot.guilds)
 
             if payload.emoji.name in self.roles_map:
                 role = discord.utils.get(
@@ -69,7 +69,7 @@ class Roles(commands.Cog):
 
         if message_id == int(MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, self.bot.guilds)
 
             if payload.emoji.name in self.roles_map:
                 role = discord.utils.get(
