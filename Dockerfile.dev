@@ -11,6 +11,10 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
+COPY dev-requirements.txt .
+
+RUN pip install -r dev-requirements.txt
+
 COPY . .
 
 ENTRYPOINT [ "python3" ]
