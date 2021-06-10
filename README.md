@@ -97,6 +97,14 @@ to rebuild the bot.
 
 Happy hacking!
 
+### Linting
+
+We use [flake8](https://flake8.pycqa.org/en/latest/) to lint the project and
+warn about possible errors. When you create a PR, flake8 will be run
+automatically to ensure your changes are in compliance. To enable live flake8
+errors in VSCode, follow the instructions here:
+https://flake8.pycqa.org/en/latest/.
+
 ## License
 
 AGPL 3.0
