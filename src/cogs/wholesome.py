@@ -1,14 +1,6 @@
-import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
-import praw
-import urllib
-import argparse
-import pandas as pd
-import datetime
-from bs4 import BeautifulSoup
-import requests
 
 load_dotenv()
 api_key = os.getenv('REDDIT_API_KEY')
