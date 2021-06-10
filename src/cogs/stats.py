@@ -11,7 +11,11 @@ class Stats(commands.Cog):
     async def stats(self, ctx):
         guild = ctx.guild
 
-        online = sum(member.status is discord.Status.online or member.status is discord.Status.do_not_disturb or member.status is discord.Status.idle for member in guild.members)
+        online = sum(
+                member.status is discord.Status.online or
+                member.status is discord.Status.do_not_disturb or
+                member.status is discord.Status.idle for member in guild.members
+            )
 
         embed = discord.Embed(
             color=0x7ce4f7,

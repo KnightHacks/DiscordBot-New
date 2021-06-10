@@ -55,7 +55,7 @@ class KHRoles(commands.Cog):
             guild_id = payload.guild_id
             guild = discord.utils.find(
                 lambda g: g.id == guild_id,
-                bot.guilds
+                self.bot.guilds
             )
 
             if payload.emoji.name in self.lang_roles:
@@ -81,7 +81,7 @@ class KHRoles(commands.Cog):
             guild_id = payload.guild_id
             guild = discord.utils.find(
                 lambda g: g.id == guild_id,
-                bot.guilds
+                self.bot.guilds
             )
 
             if payload.emoji.name in self.skills:
@@ -111,7 +111,7 @@ class KHRoles(commands.Cog):
 
         if message_id == int(LANG_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, self.bot.guilds)
 
             if payload.emoji.name in self.lang_roles:
                 role = discord.utils.get(
@@ -132,7 +132,7 @@ class KHRoles(commands.Cog):
 
         if message_id == int(OTHER_MSGID):
             guild_id = payload.guild_id
-            guild = discord.utils.find(lambda g: g.id == guild_id, bot.guilds)
+            guild = discord.utils.find(lambda g: g.id == guild_id, self.bot.guilds)
 
             if payload.emoji.name in self.skills:
                 role = discord.utils.get(

@@ -12,7 +12,7 @@ class Devselect(commands.Cog):
     @commands.has_role("Dev Team")
     async def devselect(self, ctx, count, *names):
         if count is None:
-            await ctx.send("Please specify a count!")  
+            await ctx.send("Please specify a count!")
         count = int(count)
         pr_reviewers = ", ".join(random.sample(names, count))
         await ctx.send(
