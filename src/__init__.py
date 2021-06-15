@@ -14,6 +14,8 @@ bot = commands.Bot(
     activity=discord.Game('with the discord API!'),
     intents=intents,
 )
+
+# Register the Slash command handler.
 slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 bot.remove_command('help')
 builtins.bot = bot

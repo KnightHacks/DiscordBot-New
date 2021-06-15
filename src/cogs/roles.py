@@ -55,8 +55,23 @@ class Roles(commands.Cog):
         )
     ])
     async def _addrole(self, ctx: SlashContext, role: str):
+        # Show the user that the bot is thinking.
         await ctx.defer()
-        await ctx.send("Pong!")
+
+        # Fetch the role from the cache.
+        role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
+
+        # This branch shouldn't happen, but just in case...
+        if (role is None):
+            await ctx.send(f'Error, could not find the role: {ctx.args[0]}')
+            return
+
+        # Add member to role.
+        member = ctx.author
+        await member.add_roles(role)
+
+        # We did it!
+        await ctx.send(f"Successfully registered for role: {role}!")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
