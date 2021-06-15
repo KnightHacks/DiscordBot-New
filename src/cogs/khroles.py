@@ -69,16 +69,16 @@ class KHRoles(commands.Cog):
         role = discord.utils.get(ctx.guild.roles, name=skill)
 
         if (role is None):
-            await ctx.send(f"Could not find skill with name: '{skill}'.")
+            await ctx.send(f"Could not find skill with name: '{skill}'.", hidden=True)
             return
 
         # Check prior membership
         if (role in ctx.author.roles):
-            await ctx.send(f"You are already part of {skill}.")
+            await ctx.send(f"You are already part of {skill}.", hidden=True)
             return
 
         await ctx.author.add_roles(role)
-        await ctx.send(f"Successfully added skill {skill}!")
+        await ctx.send(f"Successfully added skill {skill}!", hidden=True)
 
     @cog_ext.cog_slash(name="removeSkill", description="Removes a skill from your discord account.", guild_ids=[GUILD_ID], options=[
         create_option(
@@ -101,16 +101,16 @@ class KHRoles(commands.Cog):
         role = discord.utils.get(ctx.guild.roles, name=skill)
 
         if (role is None):
-            await ctx.send(f"Error: Could not find skill with name: '{skill}''.")
+            await ctx.send(f"Error: Could not find skill with name: '{skill}''.", hidden=True)
             return
 
         # Check prior membership
         if (role not in ctx.author.roles):
-            await ctx.send(f"You don't have the skill {skill}")
+            await ctx.send(f"You don't have the skill {skill}", hidden=True)
             return
 
         await ctx.author.remove_roles(role)
-        await ctx.send(f"Successfully removed {skill} skill!")
+        await ctx.send(f"Successfully removed {skill} skill!", hidden=True)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):

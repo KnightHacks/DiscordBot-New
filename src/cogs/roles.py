@@ -66,12 +66,12 @@ class Roles(commands.Cog):
 
         # This branch shouldn't happen, but just in case...
         if (fetched_role is None):
-            await ctx.send(f"Error: could not find the role: '{ctx.args[0]}'")
+            await ctx.send(f"Error: could not find the role: '{ctx.args[0]}'", hidden=True)
             return
 
         # Check prior membership
         if (fetched_role in ctx.author.roles):
-            await ctx.send(f"You are already part of {role}.")
+            await ctx.send(f"You are already part of {role}.", hidden=True)
             return
 
         # Add member to role.
@@ -79,7 +79,7 @@ class Roles(commands.Cog):
         await member.add_roles(fetched_role)
 
         # We did it!
-        await ctx.send(f"Successfully registered for role: {role}!")
+        await ctx.send(f"Successfully registered for role: {role}!", hidden=True)
 
     @cog_ext.cog_slash(name='removeRole', description='Removes a role from your account.', guild_ids=[GUILD_ID], options=[
         create_option(
@@ -104,12 +104,12 @@ class Roles(commands.Cog):
 
         # This branch shouldn't happen, but just in case...
         if (fetched_role is None):
-            await ctx.send(f"Error: Could not find the role: '{ctx.args[0]}.'")
+            await ctx.send(f"Error: Could not find the role: '{ctx.args[0]}.'", hidden=True)
             return
 
         # Check prior membership
         if (fetched_role not in ctx.author.roles):
-            await ctx.send(f"You are not a member of {role}.")
+            await ctx.send(f"You are not a member of {role}.", hidden=True)
             return
 
         # Add member to role.
@@ -117,7 +117,7 @@ class Roles(commands.Cog):
         await member.remove_roles(fetched_role)
 
         # We did it!
-        await ctx.send(f"Successfully removed role: {role}!")
+        await ctx.send(f"Successfully removed role: {role}!", hidden=True)
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
