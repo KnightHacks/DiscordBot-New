@@ -60,13 +60,20 @@ This file should be automatically ignored by the Git configuration.
 echo "DISCORD_TOKEN=YOUR_TOKEN_HERE" > .env
 ```
 
+Then go to the discord server which you are testing with and get the guild ID.
+Add this to your .env
+
+```bash
+echo "GUILD_ID=YOUR_GUILD_ID_HERE" > .env
+```
+
 ### Set up Permissions
 
 Finally, you'll need to give your test bot the appropriate permissions so it
 can do things. First, on the "Bot" page, turn **on** the "Server Members
 Intent" option under "Privileged Gateway Intents".
 
-Next, go to the OAuth2 page and **select "bot" under "Scopes"**. A bunch of
+Next, go to the OAuth2 page and **select "bot" and "application.command" under "Scopes"**. A bunch of
 permissions should appear below; the following are recommended settings for the
 bot permissions:
 
