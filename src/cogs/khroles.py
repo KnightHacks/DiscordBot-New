@@ -47,31 +47,29 @@ class KHRoles(commands.Cog):
         "unity": "Unity"
     }
 
-    choices = map(
-        lambda value:
-            create_choice(
-                name=value,
-                value=value
-            ), skills.values())
-
     @cog_ext.cog_slash(name="addSkill", description="Adds a skill to your discord account.", guild_ids=[GUILD_ID], options=[
         create_option(
             name="skill",
             required=True,
             description="The skill to add.",
             option_type=3,
-            choices=choices
+            choices=map(
+                lambda value:
+                    create_choice(
+                        name=value,
+                        value=value
+                    ), skills.values())
         )
     ])
     async def addSkill(self, ctx: SlashContext, skill: str):
         # Bot is thinking
-        ctx.defer()
+        await ctx.defer()
 
         # Fetch role
         role = discord.utils.get(ctx.guild.roles, name=skill)
 
         if (role is None):
-            await ctx.send(f"Could not find skill with name: '{skill}''.")
+            await ctx.send(f"Could not find skill with name: '{skill}'.")
             return
 
         # Check prior membership
@@ -80,7 +78,39 @@ class KHRoles(commands.Cog):
             return
 
         await ctx.author.add_roles(role)
-        ctx.send(f"Successfully added skill {skill}!")
+        await ctx.send(f"Successfully added skill {skill}!")
+
+    @cog_ext.cog_slash(name="removeSkill", description="Removes a skill from your discord account.", guild_ids=[GUILD_ID], options=[
+        create_option(
+            name="skill",
+            required=True,
+            description="The skill to remove.",
+            option_type=3,
+            choices=map(
+                lambda value:
+                    create_choice(
+                        name=value,
+                        value=value
+                    ), skills.values())
+        )
+    ])
+    async def removeSkill(self, ctx: SlashContext, skill: str):
+        await ctx.defer()
+
+        # Fetch role
+        role = discord.utils.get(ctx.guild.roles, name=skill)
+
+        if (role is None):
+            await ctx.send(f"Error: Could not find skill with name: '{skill}''.")
+            return
+
+        # Check prior membership
+        if (role not in ctx.author.roles):
+            await ctx.send(f"You don't have the skill {skill}")
+            return
+
+        await ctx.author.remove_roles(role)
+        await ctx.send(f"Successfully removed {skill} skill!")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):

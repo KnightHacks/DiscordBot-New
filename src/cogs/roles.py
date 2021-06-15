@@ -9,13 +9,7 @@ load_dotenv()
 MSGID = os.getenv('823687567206776862')
 GUILD_ID = int(os.getenv('GUILD_ID'))
 
-
-class Roles(commands.Cog):
-
-    def __init__(self, bot):
-        self.bot = bot
-
-    roles_map = {
+roles_map = {
         # Format:
         # 'emoji' : 'rolename'
         "👔": "OPS",
@@ -36,12 +30,18 @@ class Roles(commands.Cog):
         "knighthacks": "knighthacks"
     }
 
-    choices = map(
-        lambda entry:
-            create_choice(
-                name=entry,
-                value=entry
-            ), roles_map.values())
+choices = map(
+    lambda entry:
+        create_choice(
+            name=entry,
+            value=entry
+        ), roles_map.values())
+
+
+class Roles(commands.Cog):
+
+    def __init__(self, bot):
+        self.bot = bot
 
     @cog_ext.cog_slash(name='addRole', description='Adds a role to your account.', guild_ids=[GUILD_ID], options=[
         create_option(
@@ -49,7 +49,12 @@ class Roles(commands.Cog):
             description="The role to add.",
             option_type=3,
             required=True,
-            choices=choices
+            choices=map(
+                lambda entry:
+                    create_choice(
+                        name=entry,
+                        value=entry
+                    ), roles_map.values())
         )
     ])
     async def _addrole(self, ctx: SlashContext, role: str):
@@ -61,7 +66,7 @@ class Roles(commands.Cog):
 
         # This branch shouldn't happen, but just in case...
         if (fetched_role is None):
-            await ctx.send(f"Error, could not find the role: '{ctx.args[0]}'")
+            await ctx.send(f"Error: could not find the role: '{ctx.args[0]}'")
             return
 
         # Check prior membership
@@ -75,6 +80,44 @@ class Roles(commands.Cog):
 
         # We did it!
         await ctx.send(f"Successfully registered for role: {role}!")
+
+    @cog_ext.cog_slash(name='removeRole', description='Removes a role from your account.', guild_ids=[GUILD_ID], options=[
+        create_option(
+            name="role",
+            description="The role to remove.",
+            option_type=3,
+            required=True,
+            choices=map(
+                lambda entry:
+                    create_choice(
+                        name=entry,
+                        value=entry
+                    ), roles_map.values())
+        )
+    ])
+    async def _removerole(self, ctx: SlashContext, role: str):
+        # Show the user that the bot is thinking.
+        await ctx.defer()
+
+        # Fetch the role from the cache.
+        fetched_role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
+
+        # This branch shouldn't happen, but just in case...
+        if (fetched_role is None):
+            await ctx.send(f"Error: Could not find the role: '{ctx.args[0]}.'")
+            return
+
+        # Check prior membership
+        if (fetched_role not in ctx.author.roles):
+            await ctx.send(f"You are not a member of {role}.")
+            return
+
+        # Add member to role.
+        member = ctx.author
+        await member.remove_roles(fetched_role)
+
+        # We did it!
+        await ctx.send(f"Successfully removed role: {role}!")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
