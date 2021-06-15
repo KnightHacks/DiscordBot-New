@@ -9,8 +9,6 @@ load_dotenv()
 MSGID = os.getenv('823687567206776862')
 GUILD_ID = int(os.getenv('GUILD_ID'))
 
-print(GUILD_ID)
-
 
 class Roles(commands.Cog):
 
@@ -45,7 +43,7 @@ class Roles(commands.Cog):
                 value=entry
             ), roles_map.values())
 
-    @cog_ext.cog_slash(name='addrole', description='Adds a role to your account.', guild_ids=[GUILD_ID], options=[
+    @cog_ext.cog_slash(name='addRole', description='Adds a role to your account.', guild_ids=[GUILD_ID], options=[
         create_option(
             name="role",
             description="The role to add.",
@@ -59,16 +57,21 @@ class Roles(commands.Cog):
         await ctx.defer()
 
         # Fetch the role from the cache.
-        role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
+        fetched_role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
 
         # This branch shouldn't happen, but just in case...
-        if (role is None):
-            await ctx.send(f'Error, could not find the role: {ctx.args[0]}')
+        if (fetched_role is None):
+            await ctx.send(f"Error, could not find the role: '{ctx.args[0]}'")
+            return
+
+        # Check prior membership
+        if (fetched_role in ctx.author.roles):
+            await ctx.send(f"You are already part of {role}.")
             return
 
         # Add member to role.
         member = ctx.author
-        await member.add_roles(role)
+        await member.add_roles(fetched_role)
 
         # We did it!
         await ctx.send(f"Successfully registered for role: {role}!")

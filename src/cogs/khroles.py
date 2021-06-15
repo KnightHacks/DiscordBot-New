@@ -1,11 +1,15 @@
 import discord
 from discord.ext import commands
 import os
+from discord_slash import cog_ext
+from discord_slash.context import SlashContext
+from discord_slash.utils.manage_commands import create_choice, create_option
 from dotenv import load_dotenv
 
 load_dotenv()
 LANG_MSGID = os.getenv('823687567206776862')
 OTHER_MSGID = os.getenv('823687567206776862')
+GUILD_ID = int(os.getenv('GUILD_ID'))
 
 
 class KHRoles(commands.Cog):
@@ -42,6 +46,41 @@ class KHRoles(commands.Cog):
         "aws": "AWS",
         "unity": "Unity"
     }
+
+    choices = map(
+        lambda value:
+            create_choice(
+                name=value,
+                value=value
+            ), skills.values())
+
+    @cog_ext.cog_slash(name="addSkill", description="Adds a skill to your discord account.", guild_ids=[GUILD_ID], options=[
+        create_option(
+            name="skill",
+            required=True,
+            description="The skill to add.",
+            option_type=3,
+            choices=choices
+        )
+    ])
+    async def addSkill(self, ctx: SlashContext, skill: str):
+        # Bot is thinking
+        ctx.defer()
+
+        # Fetch role
+        role = discord.utils.get(ctx.guild.roles, name=skill)
+
+        if (role is None):
+            await ctx.send(f"Could not find skill with name: '{skill}''.")
+            return
+
+        # Check prior membership
+        if (role in ctx.author.roles):
+            await ctx.send(f"You are already part of {skill}.")
+            return
+
+        await ctx.author.add_roles(role)
+        ctx.send(f"Successfully added skill {skill}!")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
