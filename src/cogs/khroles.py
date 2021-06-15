@@ -63,7 +63,7 @@ class KHRoles(commands.Cog):
     ])
     async def add_skill(self, ctx: SlashContext, skill: str):
         # Bot is thinking
-        await ctx.defer()
+        await ctx.defer(hidden=True)
 
         # Fetch role
         role = discord.utils.get(ctx.guild.roles, name=skill)
@@ -95,7 +95,7 @@ class KHRoles(commands.Cog):
         )
     ])
     async def remove_skill(self, ctx: SlashContext, skill: str):
-        await ctx.defer()
+        await ctx.defer(hidden=True)
 
         # Fetch role
         role = discord.utils.get(ctx.guild.roles, name=skill)

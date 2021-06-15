@@ -59,7 +59,7 @@ class Roles(commands.Cog):
     ])
     async def add_role(self, ctx: SlashContext, role: str):
         # Show the user that the bot is thinking.
-        await ctx.defer()
+        await ctx.defer(hidden=True)
 
         # Fetch the role from the cache.
         fetched_role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
@@ -97,7 +97,7 @@ class Roles(commands.Cog):
     ])
     async def remove_role(self, ctx: SlashContext, role: str):
         # Show the user that the bot is thinking.
-        await ctx.defer()
+        await ctx.defer(hidden=True)
 
         # Fetch the role from the cache.
         fetched_role = discord.utils.get(ctx.guild.roles, name=ctx.args[0])
