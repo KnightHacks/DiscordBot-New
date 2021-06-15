@@ -57,7 +57,7 @@ class Roles(commands.Cog):
                     ), roles_map.values())
         )
     ])
-    async def _addrole(self, ctx: SlashContext, role: str):
+    async def add_role(self, ctx: SlashContext, role: str):
         # Show the user that the bot is thinking.
         await ctx.defer()
 
@@ -95,7 +95,7 @@ class Roles(commands.Cog):
                     ), roles_map.values())
         )
     ])
-    async def _removerole(self, ctx: SlashContext, role: str):
+    async def remove_role(self, ctx: SlashContext, role: str):
         # Show the user that the bot is thinking.
         await ctx.defer()
 

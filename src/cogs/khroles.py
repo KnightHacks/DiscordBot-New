@@ -61,7 +61,7 @@ class KHRoles(commands.Cog):
                     ), skills.values())
         )
     ])
-    async def addSkill(self, ctx: SlashContext, skill: str):
+    async def add_skill(self, ctx: SlashContext, skill: str):
         # Bot is thinking
         await ctx.defer()
 
@@ -94,7 +94,7 @@ class KHRoles(commands.Cog):
                     ), skills.values())
         )
     ])
-    async def removeSkill(self, ctx: SlashContext, skill: str):
+    async def remove_skill(self, ctx: SlashContext, skill: str):
         await ctx.defer()
 
         # Fetch role
