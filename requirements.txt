@@ -3,3 +3,4 @@ python-dotenv
 beautifulsoup4
 praw
 pandas
+discord-py-slash-command

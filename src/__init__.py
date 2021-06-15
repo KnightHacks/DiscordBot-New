@@ -1,6 +1,7 @@
 import os
 import logging
 import discord
+from discord_slash import SlashCommand
 from dotenv import load_dotenv
 from discord.ext import commands
 import builtins
@@ -11,8 +12,9 @@ intents.members = True
 bot = commands.Bot(
     command_prefix='!',
     activity=discord.Game('with the discord API!'),
-    intents=intents
+    intents=intents,
 )
+slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 bot.remove_command('help')
 builtins.bot = bot
 

@@ -1,10 +1,15 @@
 import discord
 from discord.ext import commands
+from discord_slash import cog_ext, SlashContext
 import os
+from discord_slash.utils.manage_commands import create_choice, create_option
 from dotenv import load_dotenv
 
 load_dotenv()
 MSGID = os.getenv('823687567206776862')
+GUILD_ID = int(os.getenv('GUILD_ID'))
+
+print(GUILD_ID)
 
 
 class Roles(commands.Cog):
@@ -32,6 +37,26 @@ class Roles(commands.Cog):
         "👩‍🔬": "Physics",
         "knighthacks": "knighthacks"
     }
+
+    choices = map(
+        lambda entry:
+            create_choice(
+                name=entry,
+                value=entry
+            ), roles_map.values())
+
+    @cog_ext.cog_slash(name='addrole', description='Adds a role to your account.', guild_ids=[GUILD_ID], options=[
+        create_option(
+            name="role",
+            description="The role to add.",
+            option_type=3,
+            required=True,
+            choices=choices
+        )
+    ])
+    async def _addrole(self, ctx: SlashContext, role: str):
+        await ctx.defer()
+        await ctx.send("Pong!")
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
