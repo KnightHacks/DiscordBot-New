@@ -64,7 +64,7 @@ Then go to the discord server which you are testing with and get the guild ID.
 Add this to your .env
 
 ```bash
-echo "GUILD_ID=YOUR_GUILD_ID_HERE" > .env
+echo "GUILD_ID=YOUR_GUILD_ID_HERE" >> .env
 ```
 
 ### Set up Permissions
